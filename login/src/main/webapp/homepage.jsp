@@ -12,8 +12,9 @@
 <a href="loginpage.jsp">LOG OUT</a>
 <title>Crawl Build Tracker</title>
 </head>
-<body>
+<body background ="Image/Watermark.png">
 
+       
 	<div class="container">
 	<a href="#" class="button" id="button">ADD TASK</a>
 	</div>
@@ -30,19 +31,8 @@
 			  	<option value="Selenium">Selenium</option> 	
 			  	</select><br><br>
 			  	
-			  	<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><label><i> Requested by: </i></label></font>
-			  	 <select name="Requested by"  required>
-			  	 
-			  	 <option >--Requested by--</option>
-			  	<option value="Abul">Abul</option>
-			  	<option value="Deepika">Deepika</option>
-			  	<option value="Indhumathy">Indhumathy</option>
-			  	<option value="Kumari">Kumari</option> 	
-			  	<option value="Maheshwaran">Maheshwaran</option>
-			  	<option value="Nishka">Nishka</option>
-			  	<option value="Prathamesh">Prathamesh</option>
-			  	<option value="Shubham" >Shubham</option>
-			  	</select><br><br>	
+			  	<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><label><i> Requested by: </i></label></font><input type="text" placeholder="Requested by" name ="Requested by" /><br> <br>
+			  	
 			  	
 			  	<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><label><i> Received on: </i></label></font><input type="date" name="Received on" />
 			  	<br><br>	
@@ -54,13 +44,15 @@
 			  	<option value="L2 Analysis">L2 Analysis</option>
 			  	<option value="Development">Development</option>
 			  	<option value="Modification New Attribute">Modification New Attribute</option>
+			  	<option value="Template creation">Template creation</option>
+			  	<option value="Template modification">Template modification</option>	
 			  	</select><br><br>
 			  	<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><label><i> Script type: </i></label></font> <select name="Script type"  required>
 			  	 <option>--Script type--</option>
 			  	<option value="KC/PL">KC/PL</option>
 			  	<option value="PDP">PDP</option>
 			  	<option value="AEM">AEM</option>
-			  	<option value="AED">AED</option>
+			  	<option value="AED">AED</option>	  	
 			  	</select><br><br>
 			  	
 			  	<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><label><i> Retailer: </i></label></font><input type="text" placeholder="Retailer" name ="Retailer"><br> <br>
@@ -69,13 +61,22 @@
 			  	
 			  	<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><label><i> Assigned to: </i></label></font> <select name="Assigned to"  required>
 			  	 <option>--Assigned to--</option>
-			  	<option value="Ankita sawant">Ankita sawant</option>
+			  	<option value="Ankita Sawant">Ankita Sawant</option>
 			  	<option value="Dheepthika">Dheepthika</option>
 			  	<option value="Lavanya">Lavanya</option>
 			  	<option value="Prajakta">Prajakta</option>
 			  	<option value="Shalini">Shalini</option>
 			  	<option value="Shaziya">Shaziya</option>
 			  	<option value="Swetha">Swetha</option>
+			    <option value="Suhas">Suhas</option>
+			  	<option value="Annie Nitha Arakkal">Annie Nitha Arakkal</option>
+			  	<option value="Suriyakumar">Suriyakumar</option>
+			  	<option value="Veena">Veena</option>
+			  	<option value="Sakshi Maharana">Sakshi Maharana</option>
+			  	<option value="Lokesh kumar Singh">Lokesh kumar Singh</option>
+			  	<option value="Sukruth Reddy">Sukruth Reddy</option>
+			  	<option value="Sivaprakash">Sivaprakash</option>
+			  	<option value="Mohamed">Mohamed</option>			  	
 			  	<option value="Yet to assign">Yet to assign</option>
 			  	</select><br><br>
 			  		
@@ -130,9 +131,9 @@
 			        	   username_dum="Dheepthika";
 			           }
 			           if (username.equals("ankita.s")){
-			        	   username_dum="Ankita sawant";
+			        	   username_dum="Ankita Sawant";
 			           }	
-			           if (username.equals("lavanya.c")){
+			           if (username.equals("lavanya.c.k")){
 			        	   username_dum="Lavanya";
 			           }	
 	
@@ -146,9 +147,33 @@
 			           if (username.equals("shaziya.f")){
 			        	   username_dum="Shaziya";
 			           }	
-			           if (username.equals("swetha.j")){
-			        	   username_dum="Swetha";
-			           }			           
+			           if (username.equals("suhas.b")){
+			        	   username_dum="Suhas";
+			           }	
+			           if (username.equals("annie.n")){
+			        	   username_dum="Annie Nitha Arakkal";
+			           }
+			           if (username.equals("suriyakumar.s")){
+			        	   username_dum="Suriyakumar";
+			           }
+			           if (username.equals("veena.s")){
+			        	   username_dum="Veena";
+			           }
+			           if (username.equals("sakshi.m")){
+			        	   username_dum="Sakshi Maharana";
+			           }
+			           if (username.equals("lokesh.k")){
+			        	   username_dum="Lokesh kumar Singh";
+			           }
+			           if (username.equals("sukruth.r")){
+			        	   username_dum="Sukruth Reddy";
+			           }
+			           if (username.equals("sivaprakash")){
+			        	   username_dum="Sivaprakash";
+			           }
+			           if (username.equals("mohamed.r")){
+			        	   username_dum="Mohamed R";
+			           }
 			          ResultSet resultset = statement.executeQuery("select * from taskdetails where (status='In progress' OR status='Not started') and assignedto='"+username_dum+"' and team='"+team+"'") ;
 			       %>
 			<font style="font-family:Century-Gothic; colour:#000080 ;font-size:23px;"><br><br><i>My Tasks</i></font>	
@@ -1132,7 +1157,8 @@
 			      <% } %>
 			     </TABLE>
 			    </div>
-			    </form>				
+			    </form>	
+			    </div>			
 	    		    
-</body>
+
 </html>

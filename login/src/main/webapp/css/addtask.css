@@ -162,4 +162,8 @@ select {
   border-radius: 4px;
   background-color: #f1f1f1;
 }
-
+body{
+background-repeat:no-repeat;
+background-position: center;
+opacity:1;
+}

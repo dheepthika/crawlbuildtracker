@@ -27,7 +27,7 @@ String sql ="select * from taskdetails where id="+id;
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
 	String team = resultSet.getString("team"); 
-	String requestedby= resultSet.getString("requestedby");
+	//String requestedby= resultSet.getString("requestedby");
 	String task= resultSet.getString("task");
 	String assignedto= resultSet.getString("assignedto");
 	String status= resultSet.getString("status");
@@ -57,17 +57,7 @@ while(resultSet.next()){
 			  	</select><br><br>
 			  	
 			  	<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><label><i> 
-			  	Requested by: </i></label></font> <select name="Requested by"  required>
-			  	<option value="<%=requestedby %>"><%=requestedby %></option>
-			  	<option value="Abul">Abul</option>
-			  	<option value="Abul">Deepika</option>
-			  	<option value="Abul">Indhumathy</option>
-			  	<option value="Kumari">Kumari</option> 	
-			  	<option value="Maheshwaran">Maheshwaran</option>
-			  	<option value="Nishka">Nishka</option>
-			  	<option value="Prathamesh">Prathamesh</option>
-			  	<option value="Shubham" >Shubham</option>
-			  	</select><br><br>	
+			  	Requested by: </i></label><input type="text" name ="Requested by" value="<%=resultSet.getString("requestedby") %>"><br><br>	
 			  	
 			  	<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><label><i> 
 			  	Received on: </i></label></font><input type="date" name="Received on" value="<%=resultSet.getString("receivedon") %>">
@@ -83,6 +73,8 @@ while(resultSet.next()){
 			  	<option value="Modification breakage">Modification breakage</option>
 			  	<option value="L2 Analysis">L2 Analysis</option>
 			  	<option value="Development">Development</option>
+			  	<option value="Template creation">Template creation</option>
+			  	<option value="Template modification">Template modification</option>			  	
 			  	</select><br><br>
 			  	
 				<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><label><i> 
@@ -92,6 +84,7 @@ while(resultSet.next()){
 			  	<option value="PDP">PDP</option>
 			  	<option value="AEM">AEM</option>
 			  	<option value="AED">AED</option>
+
 			  	</select><br><br>
 			  				  	
 			  	<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><label><i> 

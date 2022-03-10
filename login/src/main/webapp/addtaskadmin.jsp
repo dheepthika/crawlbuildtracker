@@ -3,7 +3,8 @@
 <%@page import="java.sql.*"%>
 <%
 String username=session.getAttribute("username").toString();
-String team=session.getAttribute("team").toString();
+//String team=session.getAttribute("team").toString();
+String team=request.getParameter("Select team");
 String Requested_by=request.getParameter("Requested by");
 String Received_on=request.getParameter("Received on");
 String Project_name=request.getParameter("Project name");

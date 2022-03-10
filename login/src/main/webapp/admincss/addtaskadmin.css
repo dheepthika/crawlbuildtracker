@@ -235,7 +235,7 @@ TD{
 
 
 	
-	tr:nth-child(even) {background-color: #f2f2f2;}
+	
 	tr:hover {background-color:coral;}
 	
 tr
@@ -266,5 +266,11 @@ input[type=text]:focus {
 
   background-color: lightblue;
   border: 3px solid #c0c0c0;
+}
+
+body{
+background-repeat:no-repeat;
+background-position: center;
+opacity:1;
 }
 

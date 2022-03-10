@@ -12,7 +12,7 @@
 <a href="loginpage.jsp">LOG OUT</a>
 <title>Crawl Build Tracker</title>
 </head>
-<body>
+<body background ="Image/Watermark.png">
 
 	
 	

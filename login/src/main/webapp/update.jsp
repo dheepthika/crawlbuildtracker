@@ -27,7 +27,7 @@ String sql ="select * from taskdetails where id="+id;
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
 	String team = resultSet.getString("team"); 
-	String requestedby= resultSet.getString("requestedby");
+	//String requestedby= resultSet.getString("requestedby");
 	String task= resultSet.getString("task");
 	String assignedto= resultSet.getString("assignedto");
 	String status= resultSet.getString("status");
@@ -58,17 +58,10 @@ while(resultSet.next()){
 			  	</select><br><br>
 			  	
 			  	<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><label><i>
-			  	Requested by: </i></label></font> <select name="Requested by"  required>
-			  	<option value="<%=requestedby %>"><%=requestedby %></option>
-			  	<option value="Abul">Abul</option>
-			  	<option value="Abul">Deepika</option>
-			  	<option value="Abul">Indhumathy</option>
-			  	<option value="Kumari">Kumari</option> 	
-			  	<option value="Maheshwaran">Maheshwaran</option>
-			  	<option value="Nishka">Nishka</option>
-			  	<option value="Prathamesh">Prathamesh</option>
-			  	<option value="Shubham" >Shubham</option>
-			  	</select><br><br>	
+			  	Requested by: </i></label></font>
+			  	<input type="text" placeholder="ID" name ="ID" value="<%=resultSet.getString("requestedby") %>"><br> <br>
+			  	
+			  	 
 			  	
 			  	<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><label><i>
 			  	Received on: </i></label></font><input type="date" name="Received on" value="<%=resultSet.getString("receivedon") %>">
@@ -84,6 +77,8 @@ while(resultSet.next()){
 			  	<option value="Modification breakage">Modification breakage</option>
 			  	<option value="L2 Analysis">L2 Analysis</option>
 			  	<option value="Development">Development</option>
+			  	<option value="Template creation">Template creation</option>
+			  	<option value="Template modification">Template modification</option>			  	
 			  	</select><br><br>
 			  	
 			  	<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><label><i>
@@ -91,7 +86,9 @@ while(resultSet.next()){
 			  	 <option>--Script type--</option>
 			  	<option value="KC/PL">KC/PL</option>
 			  	<option value="PDP">PDP</option>
-			  	<option value="AE">AE</option>
+			  	<option value="AE">AEM</option>
+			  	<option value="AE">AED</option>
+
 			  	</select><br><br>
 			  	
 			  	
@@ -107,14 +104,23 @@ while(resultSet.next()){
 			  	<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><label><i>
 			  	Assigned to: </i></label></font> <select name="Assigned to"  required>
 			  	<option value="<%=assignedto %>"><%=assignedto %></option>
-			  	<option value="Ankita sawant">Ankita sawant</option>
+			  	<option value="Ankita Sawant">Ankita Sawant</option>
 			  	<option value="Dheepthika">Dheepthika</option>
 			  	<option value="Lavanya">Lavanya</option>
 			  	<option value="Prajakta">Prajakta</option>
 			  	<option value="Shalini">Shalini</option>
 			  	<option value="Shaziya">Shaziya</option>
 			  	<option value="Swetha">Swetha</option>
-			  	<option value="Yet a assign">Yet a assign</option>
+			    <option value="Suhas">Suhas</option>
+			  	<option value="Annie Nitha Arakkal">Annie Nitha Arakkal</option>
+			  	<option value="Suriyakumar">Suriyakumar</option>
+			  	<option value="Veena">Veena</option>
+			  	<option value="Sakshi Maharana">Sakshi Maharana</option>
+			  	<option value="Lokesh kumar Singh">Lokesh kumar Singh</option>
+			  	<option value="Sukruth Reddy">Sukruth Reddy</option>
+			  	<option value="Sivaprakash">Sivaprakash</option>
+			  	<option value="Mohamed">Mohamed</option>			  	
+			  	<option value="Yet to assign">Yet to assign</option>
 			  	</select><br><br>
 			  	
 			  	<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><label><i>
