@@ -7,14 +7,14 @@
 <html>
 <head>
 <link rel="stylesheet" href="admincss/addtaskadmin.css">
-<link rel="shortcut icon" type="png" href="Image/Crawl Build Tracker Logopics.png">
+<link rel="shortcut icon" type="png" href="Image/favicon.ico">
 <meta charset="ISO-8859-1">
 <a href="loginpage.jsp">LOG OUT</a>
 <title>Crawl Build Tracker</title>
 </head>
 <body background ="Image/Watermark.png">
 <div class="containeradminadd">
-<a href="#" class="buttonadminadd" id="buttonadminadd">ADD USER</a>
+<a href="#" class="buttonadminadd" id="buttonadminadd"><img src="Image/add user.png" class="imagees"></a>
 </div>
 <div class="popupadminadd">
 		<div class="popup-contentadminadd">
@@ -25,7 +25,7 @@
 			  	<font style="font-family:Century-Gothic; colour:#000080 ;font-size:17px;"><i><b> Password: </b></i></font><input type="password" placeholder="Password" name ="Passwordnew"><br> <br>			  	
 			  			  				  
 				</div>
-				<input type="submit" value="ADD USER" class="buttonadminadd"></input>
+				<input type="submit" value="ADD USER" class="buttonadminadd1"></input>
 			
 			</form>
 		</div>
@@ -42,7 +42,7 @@
 
 
 	<div class="containeradmin">
-	<a href="#" class="buttonadmin" id="buttonadmin">ADD TASK</a>
+	<a href="#" class="buttonadmin1" id="buttonadmin"><img src="Image/add.png" class="imageess"></a>
 	
 	</div>
 	
@@ -147,12 +147,13 @@
 		document.querySelector(".popupadmin").style.display="none";
 	});
 	</script>
+	<br>
+	<font style="font-family:Century Gothic; color:#000080 ;font-size:30px;"> <img src="Image/logo.png" class="water"> </font>
 	<form action="" name="table">
 	<div class="mytasksadmin">
-	<br><font style="font-family:Century Gothic; colour:#000080 ;font-size:28px;">Crawl Build Tracker</font>
-	<hr style=" height:10px; width:18%; border-width:0; color:#000080; background-color:#000080; text-align:left;margin-left:0">
+
 			      
-			<font style="font-family:Century Gothic; colour:#000080 ;font-size:21px;"><br><br>All Tasks</font>	
+			<font style="font-family:Century Gothic; colour:#000080 ;font-size:21px;"><br><br><img src="Image/task.png" class="updateemail">All Tasks</font>	
 			<br><br>
 			<TABLE>
 			      <TR>
@@ -968,12 +969,12 @@
 			       <TD> <%= resultset.getString(20) %></TD>
 			        <TD>
 						<form action="updateadmin.jsp" method="post">
-							<a href="updateadmin.jsp?id=<%=resultset.getString("id")%>">update</a>
+							<a href="updateadmin.jsp?id=<%=resultset.getString("id")%>"><img src="Image/update.png" class="updateemail"></a>
 						</form>
 		
  					</TD>
  					<TD>
-						<a href="mailto:LVMHcrawlingteam@ugamsolutions.com?subject=[<%=resultset.getString("retailer")%> - <%=resultset.getString("domain")%>] <%=resultset.getString("subject")%> [<%=resultset.getString("scriptype")%>]&body=Your request is received [ID:<%=resultset.getString("id")%>], we will check this and update you by <%=resultset.getString("eta")%> &cc=pio.crawling@ugamsolutions.com">SEND EMAIL</a>						
+						<a href="mailto:LVMHcrawlingteam@ugamsolutions.com?subject=[<%=resultset.getString("retailer")%> - <%=resultset.getString("domain")%>] <%=resultset.getString("subject")%> [<%=resultset.getString("scriptype")%>]&body=Your request is received [ID:<%=resultset.getString("id")%>], we will check this and update you by <%=resultset.getString("eta")%> &cc=pio.crawling@ugamsolutions.com"><img src="Image/mail.png" class="email"></a>						
 		
  					</TD>
  					

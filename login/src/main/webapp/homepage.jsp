@@ -7,16 +7,15 @@
 <html>
 <head>
 <link rel="stylesheet" href="css/addtask.css">
-<link rel="shortcut icon" type="png" href="Image/Crawl Build Tracker Logopics.png">
+<link rel="shortcut icon" type="png" href="Image/favicon.ico">
 <meta charset="ISO-8859-1">
 <a href="loginpage.jsp">LOG OUT</a>
 <title>Crawl Build Tracker</title>
 </head>
-<body background ="Image/Watermark.png">
+<body>
 
-       
 	<div class="container">
-	<a href="#" class="button" id="button">ADD TASK</a>
+	<a href="#" class="button" id="button"><img src="Image/add.png"></a>
 	</div>
 	
 	
@@ -103,7 +102,7 @@
 			  			  				  
 
 				</div>
-				<input type="submit" value="ADD TASK" class="button"></input>
+				<input type="submit" value="ADD TASK" class="button1"></input>
 			
 			</form>
 		</div>
@@ -116,9 +115,48 @@
 		document.querySelector(".popup").style.display="none";
 	});
 	</script>
-	<div class="mytasks">
-	<br><font style="font-family:Century-Gothic; colour:#000080 ;font-size:30px;"><i> Crawl Build Tracker </i></font>
-	<hr style=" height:10px; width:17%; border-width:0; color:#000080; background-color:#000080; text-align:left;margin-left:0">
+	<br><br>
+	<font style="font-family:Century Gothic; color:#000080 ;font-size:30px;"> <img src="Image/logo.png" class="water"> </font>
+	<br><br>
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'mytasks')">My tasks</button>
+  <button class="tablinks" onclick="openCity(event, 'pendingtasks')">Pending tasks</button>
+  <button class="tablinks" onclick="openCity(event, 'completedtasks')">Completed tasks</button>
+</div>
+<script>
+document.getElementById("mytasks").click();
+</script>
+<script>
+
+function openCity(evt, cityName) {
+	  // Declare all variables
+	  var i, tabcontent, tablinks;
+
+	  // Get all elements with class="tabcontent" and hide them
+	  tabcontent = document.getElementsByClassName("tabcontent");
+	  for (i = 0; i < tabcontent.length; i++) {
+	    tabcontent[i].style.display = "none";
+	  }
+
+	  // Get all elements with class="tablinks" and remove the class "active"
+	  tablinks = document.getElementsByClassName("tablinks");
+	  for (i = 0; i < tablinks.length; i++) {
+	    tablinks[i].className = tablinks[i].className.replace(" active", "");
+	  }
+
+	  // Show the current tab, and add an "active" class to the button that opened the tab
+	  document.getElementById(cityName).style.display = "block";
+	  evt.currentTarget.className += " active";
+	}
+</script>
+
+
+<div class="tabcontent" id="mytasks">
+	<div class="mytasks" id="defaultOpen">
+	<br>
+
+		
+
 			       <%
 			           Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
 			           Statement statement = connection.createStatement() ;
@@ -176,7 +214,7 @@
 			           }
 			          ResultSet resultset = statement.executeQuery("select * from taskdetails where (status='In progress' OR status='Not started') and assignedto='"+username_dum+"' and team='"+team+"'") ;
 			       %>
-			<font style="font-family:Century-Gothic; colour:#000080 ;font-size:23px;"><br><br><i>My Tasks</i></font>	
+			<font style="font-family:Century Gothic; color:#000080; ;font-size:18px;"><br><br><b>My Tasks</b></font>	
 			<br><br>
 			<TABLE BORDER="1">
 			      <TR>
@@ -201,7 +239,7 @@
 			      <TH>Estimation</TH>
 			      <TH>Status</TH>
 			      <TH>Edit</TH>
-			      <TH>Mail</TH>
+
 			      </TR>
 			      
 			      <% while(resultset.next()){ %>
@@ -229,21 +267,20 @@
 			       
 			        <TD>
 						<form action="update.jsp" method="post">
-							<a href="update.jsp?id=<%=resultset.getString("id")%>">update</a>
+							<a href="update.jsp?id=<%=resultset.getString("id")%>"><img src="Image/update.png" class="updateemail1"></a>
 						</form>
 		
  					</TD>
- 					<TD>
-						<a href="mailto:LVMHcrawlingteam@ugamsolutions.com?subject=[<%=resultset.getString("retailer")%> - <%=resultset.getString("domain")%>] <%=resultset.getString("subject")%> [<%=resultset.getString("scriptype")%>]&body=Your request is received [ID:<%=resultset.getString("id")%>], we will check this and update you by <%=resultset.getString("eta")%> &cc=pio.crawling@ugamsolutions.com">SEND EMAIL</a>						
-		
- 					</TD>
- 					
+
 			      </TR>
 			      <% } %>
 			     </TABLE>
+
 			    </div>
-			    
-<div class="mytasks1">
+	
+			  </div>  
+<div class="tabcontent" id="pendingtasks">
+<div class="mytasks1" >
 
 			       <%
 			           Connection connection1 = DriverManager.getConnection(
@@ -255,7 +292,7 @@
 			           
 			          ResultSet resultset1 = statement.executeQuery("select * from taskdetails where assignedto='Yet to assign' and team='"+team1+"'") ;
 			       %>
-			<font style="font-family:Century-Gothic; colour:#000080 ;font-size:23px;"><br><br><i>Pending Tasks</i></font>	
+			<font style="font-family:Century Gothic; color:#000080 ;font-size:18px;"><br><br><b>Pending Tasks</b></font>	
 			<br><br>
 			<TABLE BORDER="1" WIDTH="100%">
 			      <TR>
@@ -280,7 +317,7 @@
 			      <TH>Estimation</TH>
 			      <TH>Status</TH>
 			      <TH>Edit</TH>
-			      <TH>Mail</TH>
+
 			      </TR>
 			      <% while(resultset1.next()){ %>
 			      <TR>
@@ -306,23 +343,22 @@
 			           <TD> <%= resultset1.getString(20) %></TD>
 			         <TD>
 			         	<form action="update.jsp" method="post">
-							<a href="update.jsp?id=<%=resultset1.getString("id")%>">update</a>
+							<a href="update.jsp?id=<%=resultset1.getString("id")%>"><img src="Image/update.png" class="updateemail1"></a>
 						</form>
 						</TD>
-						<TD>
-						<a href="mailto:LVMHcrawlingteam@ugamsolutions.com?subject=[<%=resultset1.getString("retailer")%> - <%=resultset1.getString("domain")%>] <%=resultset1.getString("subject")%> [<%=resultset1.getString("scriptype")%>]&body=Your request is received [ID:<%=resultset1.getString("id")%>], we will check this and update you by <%=resultset1.getString("eta")%> &cc=pio.crawling@ugamsolutions.com">SEND EMAIL</a>						
-		
- 					</TD>
 			       
 			      </TR>
 			      <% } %>
 			     </TABLE>
-			    </div>	
+			    </div>
+		
+	</div>
 	
+	<div class="tabcontent"id="completedtasks">
 <form name="task">    
 <div class="mytasks2">
 			       
-			<font style="font-family:Century-Gothic; colour:#000080 ;font-size:23px;"><br><br><i>Completed Tasks</i></font>	
+			<font style="font-family:Century Gothic; color:#000080 ;font-size:18px;"><br><br><b>Completed Tasks</b></font>	
 			<br><br>
 			<TABLE BORDER="1" WIDTH="100%" id="tablefilter">
 			      <TR>
@@ -347,7 +383,7 @@
 			      <TH>Estimation</TH>
 			      <TH>Status</TH>
 			      <TH>Edit</TH>
-			      <TH>Mail</TH>
+
 			      </TR>
 			      <TR>
 				      <TD>
@@ -1145,20 +1181,18 @@
 			           <TD> <%= resultset11_1.getString(20) %></TD>
 					 <TD>
 						<form action="update.jsp" method="post">
-							<a href="update.jsp?id=<%=resultset11_1.getString("id")%>">update</a>
+							<a href="update.jsp?id=<%=resultset11_1.getString("id")%>"><img src="Image/update.png" class="updateemail1"></a>
 						</form>
 		
  					</TD>
- 					<TD>
-						<a href="mailto:LVMHcrawlingteam@ugamsolutions.com?subject=[<%=resultset11_1.getString("retailer")%> - <%=resultset11_1.getString("domain")%>] <%=resultset11_1.getString("subject")%> [<%=resultset11_1.getString("scriptype")%>]&body=Your request is received [ID:<%=resultset11_1.getString("id")%>], we will check this and update you by <%=resultset11_1.getString("eta")%> &cc=pio.crawling@ugamsolutions.com">SEND EMAIL</a>						
-		
- 					</TD>
+
 			      </TR>
 			      <% } %>
 			     </TABLE>
 			    </div>
 			    </form>	
-			    </div>			
+			    </div>	
+
 	    		    
 
 </html>

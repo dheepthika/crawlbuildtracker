@@ -166,7 +166,7 @@ while(resultSet.next()){
 			  			  				  
 
 				</div>
-				<input type="submit" value="UPDATE" class="button"></input>
+				<input type="submit" value="UPDATE" class="button1"></input>
 			
 			</form>
 		</div>

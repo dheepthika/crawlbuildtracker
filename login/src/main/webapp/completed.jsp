@@ -1,33 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@page import="com.login.ConnectionProvider"%>
+<%@page import="java.io.PrintWriter"%>
+<%@page import="com.login.ConnectionProvider"%>
 <%@page import="java.sql.*"%>
-
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="admincss/addtaskadmin.css">
-<link rel="shortcut icon" type="png" href="Image/favicon.ico">
+<link rel="stylesheet" href="css/addtask.css">
+<link rel="shortcut icon" type="png" href="Image/Crawl Build Tracker Logopics.png">
 <meta charset="ISO-8859-1">
 <a href="loginpage.jsp">LOG OUT</a>
 <title>Crawl Build Tracker</title>
 </head>
 <body background ="Image/Watermark.png">
-
-	<br>
-	<br>
-	<font style="font-family:Century Gothic; color:#000080 ;font-size:30px;"> <img src="Image/logo.png" class="water"> </font>
-	
-	
-	<form action="" name="table">
-	<div class="mytasksadmin">
-
-			      
-			<font style="font-family:Century Gothic; colour:#000080 ;font-size:21px;"><br><br>All Tasks</font>	
+<form name="task">    
+<div class="mytasks2">
+			       
+			<font style="font-family:Century Gothic; color:#000080 ;font-size:18px;"><br><br><b>Completed Tasks</b></font>	
 			<br><br>
-			<TABLE>
+			<TABLE BORDER="1" WIDTH="100%" id="tablefilter">
 			      <TR>
-					     <TH>ID</TH>
+			      <TH>ID</TH>
 			      <TH>Team</TH>
 			      <TH>Requested by</TH>
 			      <TH>Received on</TH>
@@ -48,21 +39,73 @@
 			      <TH>Estimation</TH>
 			      <TH>Status</TH>
 			      <TH>Edit</TH>
+
 			      </TR>
 			      <TR>
 				      <TD>
-				     	 <select name="id admin" <%=session.getAttribute("id admin")%> onchange="table.submit()">
-				    	 	<option selected="selected" value="all">ALL</option>
+				     	 <select name="id admin" <%=session.getAttribute("id admin")%> onchange="this.form.submit()">
+				    	 	<option selected="selected" value="all" >ALL</option>
 							       <%
-							           Connection connection1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
-							           Statement statement1 = connection1.createStatement() ;
+							           Connection connection_1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
+							           Statement statement1_1 = connection_1.createStatement() ;
 							           String strQuery = "SELECT * FROM taskdetails where ";
-
+							           String username=session.getAttribute("username").toString();
+							           String team=session.getAttribute("team").toString();
+							           String username_dum="";
+							           System.out.println("username : "+username);
+							           System.out.println("team : "+team);
+							           if (username.equals("dheepthika.m")){
+							        	   username_dum="Dheepthika";
+							           }
+							           if (username.equals("ankita.s")){
+							        	   username_dum="Ankita Sawant";
+							           }	
+							           if (username.equals("lavanya.c.k")){
+							        	   username_dum="Lavanya";
+							           }	
+					
+							           if (username.equals("prajakta.p")){
+							        	   username_dum="Prajakta";
+							           }	
+							           
+							           if (username.equals("shalini.h.s")){
+							        	   username_dum="Shalini";
+							           }	
+							           if (username.equals("shaziya.f")){
+							        	   username_dum="Shaziya";
+							           }	
+							           if (username.equals("suhas.b")){
+							        	   username_dum="Suhas";
+							           }	
+							           if (username.equals("annie.n")){
+							        	   username_dum="Annie Nitha Arakkal";
+							           }
+							           if (username.equals("suriyakumar.s")){
+							        	   username_dum="Suriyakumar";
+							           }
+							           if (username.equals("veena.s")){
+							        	   username_dum="Veena";
+							           }
+							           if (username.equals("sakshi.m")){
+							        	   username_dum="Sakshi Maharana";
+							           }
+							           if (username.equals("lokesh.k")){
+							        	   username_dum="Lokesh kumar Singh";
+							           }
+							           if (username.equals("sukruth.r")){
+							        	   username_dum="Sukruth Reddy";
+							           }
+							           if (username.equals("sivaprakash")){
+							        	   username_dum="Sivaprakash";
+							           }
+							           if (username.equals("mohamed.r")){
+							        	   username_dum="Mohamed R";
+							           }
 							           String id="all";
 							           int i=0;
 							           
 							           try{
-							        	   id=request.getParameter("id admin");								        	   
+							        	   id=request.getParameter("id admin");		
 							           }catch (Exception e){	
 							        	   id="all";
 							           }
@@ -82,10 +125,10 @@
 							        	   
 							           }
 							           
-							          ResultSet resultset1 = statement1.executeQuery("select DISTINCT id from taskdetails") ;
-							          while (resultset1.next()){
+							          ResultSet resultset1_1 = statement1_1.executeQuery("select DISTINCT id from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
+							          while (resultset1_1.next()){
 							      		 %>		
-							      		 <option><%=resultset1.getString("id")%></option>	
+							      		 <option><%=resultset1_1.getString("id")%></option>	
 							      		<% }
 							          
 							          %>
@@ -94,12 +137,12 @@
 				      </TD>
 
 				      <TD>
-					      <select name="team_admin" <%=session.getAttribute("team_admin")%> onchange="table.submit()">
+					      <select name="team_admin" <%=session.getAttribute("team_admin")%> onchange="this.form.submit()">
 					      <option selected="selected" value="all">ALL</option>
 					       <%
 					        
-					           Connection connection2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
-					           Statement statement2 = connection2.createStatement() ;
+					           Connection connection2_1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
+					           Statement statement2_1 = connection2_1.createStatement() ;
 					           
 					           String teamadmin="all";
 					           try{
@@ -121,10 +164,10 @@
 					        	   
 					           }
 					           
-					          ResultSet resultset2 = statement2.executeQuery("select DISTINCT team from taskdetails") ;
-					          while (resultset2.next()){
+					          ResultSet resultset2_1 = statement2_1.executeQuery("select DISTINCT team from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
+					          while (resultset2_1.next()){
 					      		 %>		
-					      		 <option><%=resultset2.getString("team")%></option>	
+					      		 <option><%=resultset2_1.getString("team")%></option>	
 					      		 
 					      		<% }
 					          
@@ -133,7 +176,7 @@
 					       </select>
 				    </TD>
 				    <TD>
-						 <select name="Requested by admin" <%=session.getAttribute("Requested by admin") %>  onchange="table.submit()">
+						 <select name="Requested by admin" <%=session.getAttribute("Requested by admin") %>  onchange="this.form.submit()">
 						    <option selected="selected" value="all">ALL</option>
 						       <%
 						           Connection connection3= DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
@@ -158,7 +201,7 @@
 						        	   
 						           }
 						           
-						          ResultSet resultset3 = statement3.executeQuery("select Distinct requestedby  from taskdetails") ;
+						          ResultSet resultset3 = statement3.executeQuery("select Distinct requestedby  from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 						          while (resultset3.next()){
 						      		 %>		
 						      		 <option><%=resultset3.getString("requestedby")%></option>	
@@ -172,7 +215,7 @@
 					         
 				    </TD>
 			        <TD>
-			     		 <select name="Received on admin" <%=session.getAttribute("Received on admin") %> onchange="table.submit()" >
+			     		 <select name="Received on admin" <%=session.getAttribute("Received on admin") %> onchange="this.form.submit()" >
 			     			<option selected="selected" value="all">ALL</option>
 						       <%
 						           Connection connection4= DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
@@ -198,7 +241,7 @@
 						           
 						           }
 						         
-						          ResultSet resultset4 = statement4.executeQuery("select Distinct receivedon from taskdetails") ;
+						          ResultSet resultset4 = statement4.executeQuery("select Distinct receivedon from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 						          while (resultset4.next()){
 						      		 %>		
 						      		 <option><%=resultset4.getString("receivedon")%></option>	
@@ -208,8 +251,9 @@
 			          		
 			          	</select>
 			         </TD>
+			         
 			         <TD>
-					      <select name="projectname_admin" <%=session.getAttribute("projectname_admin")%> onchange="table.submit()">
+					      <select name="projectname_admin" <%=session.getAttribute("projectname_admin")%> onchange="this.form.submit()">
 					      <option selected="selected" value="all">ALL</option>
 					       <%
 					        
@@ -236,7 +280,7 @@
 					        	   
 					           }
 					           
-					          ResultSet resultset4_1 = statement4_1.executeQuery("select DISTINCT projectname from taskdetails") ;
+					          ResultSet resultset4_1 = statement4_1.executeQuery("select DISTINCT projectname from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 					          while (resultset4_1.next()){
 					      		 %>		
 					      		 <option><%=resultset4_1.getString("projectname")%></option>	
@@ -247,8 +291,9 @@
 					       
 					       </select>
 				    </TD>
+				    
 			         <TD>
-			       			<select name="Task admin" <%=session.getAttribute("Task admin") %> onchange="table.submit()" >
+			       			<select name="Task admin" <%=session.getAttribute("Task admin") %> onchange="this.form.submit()" >
 			      				<option selected="selected" value="all">ALL</option>
 								       <%
 								       
@@ -257,23 +302,25 @@
 								           
 								           String taskadmin="all";
 								           try{
-								        	   taskadmin=request.getParameter("Task admin");					        	   
-								           }catch (Exception e){					        	  
+								        	   taskadmin=request.getParameter("Task admin");
+								        	   System.out.println("taskadmin : "+taskadmin);
+								           }catch (Exception e){	
+								        	   
 								           }
 								           
 								           try{
 										           if (!taskadmin.equals("all")){
-										   			if (i==0){
-										   				i=1;
-										   				strQuery=strQuery+" task = '"+taskadmin+"'";
-										   			}else{
-										   				i++;
-										   				strQuery=strQuery+" and task = '"+taskadmin+"'";
-										   			}
+											   			if (i==0){
+											   				i=1;
+											   				strQuery=strQuery+" task = '"+taskadmin+"'";
+											   			}else{
+											   				i++;
+											   				strQuery=strQuery+" and task = '"+taskadmin+"'";
+											   			}
 										   		 }		
 								           }catch (Exception e){}
 								         
-								          ResultSet resultset5 = statement5.executeQuery("select Distinct task from taskdetails") ;
+								          ResultSet resultset5 = statement5.executeQuery("select Distinct task from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 								          while (resultset5.next()){
 								      		 %>		
 								      		 <option><%=resultset5.getString("task")%></option>	
@@ -283,8 +330,9 @@
 			          			
 			          		</select>
 			         </TD>
-			         <TD>
-					      <select name="scriptype_admin" <%=session.getAttribute("scriptype_admin")%> onchange="table.submit()">
+			         
+ 					<TD>
+					      <select name="scriptype_admin" <%=session.getAttribute("scriptype_admin")%> onchange="this.form.submit()">
 					      <option selected="selected" value="all">ALL</option>
 					       <%
 					        
@@ -311,7 +359,7 @@
 					        	   
 					           }
 					           
-					          ResultSet resultset5_1 = statement5_1.executeQuery("select DISTINCT scriptype from taskdetails") ;
+					          ResultSet resultset5_1 = statement5_1.executeQuery("select DISTINCT scriptype from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 					          while (resultset5_1.next()){
 					      		 %>		
 					      		 <option><%=resultset5_1.getString("scriptype")%></option>	
@@ -321,16 +369,16 @@
 					          %>
 					       
 					       </select>
-				    </TD>	
+				    </TD>			         
 			     	 <TD>
-			      			<select name="Retailer admin" <%=session.getAttribute("Retailer admin") %>  onchange="table.submit()">
+			      			<select name="Retailer admin" <%=session.getAttribute("Retailer admin") %>  onchange="this.form.submit()">
 			     				<option selected="selected" value="all">ALL</option>
 								       <%
 								           Connection connection6= DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
 								           Statement statement6 = connection6.createStatement() ;
 								           String retaileradmin="all";
 								           try{
-								        	   retaileradmin=request.getParameter("Retailer admin");					        	   
+								        	   retaileradmin=request.getParameter("retailer");					        	   
 								           }catch (Exception e){					        	  
 								           }
 								           
@@ -347,7 +395,7 @@
 								           }catch (Exception e){}
 								           
 								         
-								          ResultSet resultset6 = statement6.executeQuery("select Distinct retailer from taskdetails") ;
+								          ResultSet resultset6 = statement6.executeQuery("select Distinct retailer from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 								          while (resultset6.next()){
 								      		 %>		
 								      		 <option><%=resultset6.getString("retailer")%></option>	
@@ -357,8 +405,9 @@
 			          			
 			          		</select>
 			        </TD>
+			        
 			        <TD>
-					      <select name="domain_admin" <%=session.getAttribute("domain_admin")%> onchange="table.submit()">
+					      <select name="domain_admin" <%=session.getAttribute("domain_admin")%> onchange="this.form.submit()">
 					      <option selected="selected" value="all">ALL</option>
 					       <%
 					        
@@ -385,7 +434,7 @@
 					        	   
 					           }
 					           
-					          ResultSet resultset6_1 = statement6_1.executeQuery("select DISTINCT domain from taskdetails") ;
+					          ResultSet resultset6_1 = statement6_1.executeQuery("select DISTINCT domain from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 					          while (resultset6_1.next()){
 					      		 %>		
 					      		 <option><%=resultset6_1.getString("domain")%></option>	
@@ -396,8 +445,9 @@
 					       
 					       </select>
 				    </TD>
+				    
 			        <TD>
-			       		<select name="Subject admin" <%=session.getAttribute("Subject admin") %> onchange="table.submit()" >
+			       		<select name="Subject admin" <%=session.getAttribute("Subject admin") %> onchange="this.form.submit()" >
 			      			<option selected="selected" value="all">ALL</option>
 								       <%
 								      
@@ -421,7 +471,7 @@
 											   		 }	
 								           }catch (Exception e){}
 								         
-								          ResultSet resultset7 = statement7.executeQuery("select Distinct subject from taskdetails") ;
+								          ResultSet resultset7 = statement7.executeQuery("select Distinct subject from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 								          while (resultset7.next()){
 								      		 %>		
 								      		 <option><%=resultset7.getString("subject")%></option>	
@@ -432,7 +482,7 @@
 			          </select>
 			      </TD>
 			      <TD>
-			       		<select name="Assigned to admin" <%=session.getAttribute("Assigned to admin") %> onchange="table.submit()" >
+			       		<select name="Assigned to admin" <%=session.getAttribute("Assigned to admin") %> onchange="this.form.submit()" >
 			      			<option selected="selected" value="all">ALL</option>
 						       <%
 						           Connection connection8= DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
@@ -456,7 +506,7 @@
 						           }catch (Exception e){}
 						           
 						         
-						          ResultSet resultset8 = statement8.executeQuery("select Distinct assignedto from taskdetails") ;
+						          ResultSet resultset8 = statement8.executeQuery("select Distinct assignedto from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 						          while (resultset8.next()){
 						      		 %>		
 						      		 <option><%=resultset8.getString("assignedto")%></option>	
@@ -466,8 +516,8 @@
 			         	
 			          </select>
 			      </TD>
-			      <TD>
-					      <select name="iteration_admin" <%=session.getAttribute("iteration_admin")%> onchange="table.submit()">
+			       <TD>
+					      <select name="iteration_admin" <%=session.getAttribute("iteration_admin")%> onchange="this.form.submit()">
 					      <option selected="selected" value="all">ALL</option>
 					       <%
 					        
@@ -494,7 +544,7 @@
 					        	   
 					           }
 					           
-					          ResultSet resultset7_1 = statement7_1.executeQuery("select DISTINCT iteration from taskdetails") ;
+					          ResultSet resultset7_1 = statement7_1.executeQuery("select DISTINCT iteration from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 					          while (resultset7_1.next()){
 					      		 %>		
 					      		 <option><%=resultset7_1.getString("iteration")%></option>	
@@ -506,7 +556,7 @@
 					       </select>
 				    </TD>
 			      <TD>
-					      <select name="Started on admin" <%=session.getAttribute("Started on admin") %> onchange="table.submit()" >
+					      <select name="Started on admin" <%=session.getAttribute("Started on admin") %> onchange="this.form.submit()" >
 							      <option selected="selected" value="all">ALL</option>
 							       <%
 							           Connection connection9= DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
@@ -530,7 +580,7 @@
 									   		 }
 							           }catch (Exception e){}
 							         
-							          ResultSet resultset9 = statement9.executeQuery("select Distinct startedon from taskdetails") ;
+							          ResultSet resultset9 = statement9.executeQuery("select Distinct startedon from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 							          while (resultset9.next()){
 							      		 %>		
 							      		 <option><%=resultset9.getString("startedon")%></option>	
@@ -540,7 +590,7 @@
 					      </select>
 				  </TD>
 			      <TD>
-					      <select name="ETA admin" <%=session.getAttribute("ETA admin") %> onchange="table.submit()" >
+					      <select name="ETA admin" <%=session.getAttribute("ETA admin") %> onchange="this.form.submit()" >
 							      <option selected="selected" value="all">ALL</option>
 							       <%
 							           Connection connection10= DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
@@ -564,7 +614,7 @@
 							           }catch (Exception e){}
 							           
 							         
-							          ResultSet resultset10 = statement10.executeQuery("select Distinct ETA from taskdetails") ;
+							          ResultSet resultset10 = statement10.executeQuery("select Distinct ETA from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 							          while (resultset10.next()){
 							      		 %>		
 							      		 <option><%=resultset10.getString("ETA")%></option>	
@@ -573,9 +623,8 @@
 							          %>
 					          </select>
 				  </TD>
-			      
-			      <TD>
-					      <select name="RTA admin" <%=session.getAttribute("RTA admin") %>  onchange="table.submit()">
+				  <TD>
+					      <select name="RTA admin" <%=session.getAttribute("RTA admin") %>  onchange="this.form.submit()">
 							      <option selected="selected" value="all">ALL</option>
 							       <%							       
 							           Connection connection12= DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
@@ -600,7 +649,7 @@
 							        	   
 							           }
 							         
-							          ResultSet resultset12 = statement12.executeQuery("select Distinct rta from taskdetails") ;
+							          ResultSet resultset12 = statement12.executeQuery("select Distinct rta from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 							          while (resultset12.next()){
 							      		 %>		
 							      		 <option><%=resultset12.getString("rta")%></option>
@@ -609,8 +658,8 @@
 							      		%>
 					          </select>
 					          </TD>
-					          <TD>
-				       <select name="ATA admin" <%=session.getAttribute("ATA admin") %> onchange="table.submit()">
+			      <TD>
+				       <select name="ATA admin" <%=session.getAttribute("ATA admin") %> onchange="this.form.submit()">
 						      <option selected="selected" value="all">ALL</option>
 						       <%
 						           Connection connection11= DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
@@ -636,7 +685,7 @@
 						           }
 								           
 								         
-						          ResultSet resultset11 = statement11.executeQuery("select Distinct ata from taskdetails") ;
+						          ResultSet resultset11 = statement11.executeQuery("select Distinct ata from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 						          while (resultset11.next()){
 						      		 %>		
 						      		 <option><%=resultset11.getString("ata")%></option>	
@@ -646,8 +695,9 @@
 				          </select>
 
 			          </TD>
+			      
 			      <TD>
-			      		<select name="Comments admin" <%=session.getAttribute("Comments admin")%> onchange="table.submit()">
+			      		<select name="Comments admin" <%=session.getAttribute("Comments admin")%> onchange="this.form.submit()">
 						      <option selected="selected" value="all">ALL</option>
 						       <%
 						           Connection connection13= DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
@@ -673,7 +723,7 @@
 						        	   
 						           }
 						         
-						          ResultSet resultset13 = statement13.executeQuery("select Distinct comments from taskdetails") ;
+						          ResultSet resultset13 = statement13.executeQuery("select Distinct comments from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 						          while (resultset13.next()){
 						      		 %>		
 						      		 <option><%=resultset13.getString("comments")%></option>	
@@ -681,9 +731,8 @@
 						          
 						          
 						</select></TD>
-						
 			      <TD>
-				       <select name="JIRA ID admin" <%=session.getAttribute("JIRA ID admin") %> onchange="table.submit()" >
+				       <select name="JIRA ID admin" <%=session.getAttribute("JIRA ID admin") %> onchange="this.form.submit()" >
 						      <option selected="selected" value="all">ALL</option>
 						       <%
 						           Connection connection14= DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
@@ -708,7 +757,7 @@
 						           }catch(Exception e){
 						        	   
 						           }
-						          ResultSet resultset14 = statement14.executeQuery("select Distinct jiraid from taskdetails") ;
+						          ResultSet resultset14 = statement14.executeQuery("select Distinct jiraid from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 						          while (resultset14.next()){
 						      		 %>		
 						      		 <option><%=resultset14.getString("jiraid")%></option>	
@@ -717,7 +766,7 @@
 						          %>
 				          </select></TD>
 			      <TD>
-			      		<select name="Estimation admin" <%=session.getAttribute("Estimation admin") %>  onchange="table.submit()">
+			      		<select name="Estimation admin" <%=session.getAttribute("Estimation admin") %>  onchange="this.form.submit()">
 			     			 <option selected="selected" value="all">ALL</option>
 							       <%
 							           Connection connection15= DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
@@ -743,7 +792,7 @@
 							           
 							           }
 									         
-							          ResultSet resultset15 = statement15.executeQuery("select Distinct estimation from taskdetails") ;
+							          ResultSet resultset15 = statement15.executeQuery("select Distinct estimation from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 							          while (resultset15.next()){
 							      		 %>		
 							      		 <option><%=resultset15.getString("estimation")%></option>	
@@ -753,7 +802,7 @@
 			          </select>
 			      </TD>
 			      <TD>
-			      		 <select name="Status admin" <%=session.getAttribute("Status admin") %> onchange="table.submit()" >
+			      		 <select name="Status admin" <%=session.getAttribute("Status admin") %> onchange="this.form.submit()" >
 			      			<option selected="selected" value="all">ALL</option>
 						       <%
 						      
@@ -782,7 +831,7 @@
 						           }
 						         						          
 						         
-						          ResultSet resultset16 = statement16.executeQuery("select Distinct status from taskdetails") ;
+						          ResultSet resultset16 = statement16.executeQuery("select Distinct status from taskdetails where (team='"+team+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 						          while (resultset16.next()){
 						      		 %>		
 						      		 <option><%=resultset16.getString("status")%></option>	
@@ -793,61 +842,61 @@
 			      </TD>	
 			      
 			      <TD>
-			      <a href="homepageguest.jsp">Clear Filter</a>
+			      <a href="homepage.jsp">Clear Filter</a>
 			      </TD>		     
 			      </TR>
-			       <%
+			      <%
 			       //int i=1;
-			           Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
-			           Statement statement = connection.createStatement() ;
-			           String username=session.getAttribute("username").toString();
-			           String team=session.getAttribute("team").toString();
-			           String username_dum="";
-			           ResultSet resultset;
+			           Connection connection1_1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/crawlbuildjsp","root","Dheepthi@123");
+			           Statement statement_1 = connection1_1.createStatement() ;
+			           String username1_1=session.getAttribute("username").toString();
+			           String team1_1=session.getAttribute("team").toString();
+			           strQuery=strQuery + " and ((team='"+team1_1+"' and assignedto='"+username_dum+"'))"+" and (status='Closed' OR status='Completed' OR status='Duplicate')";
+			           ResultSet resultset11_1;
 
 				          if (i==0) {
-				        	  resultset = statement.executeQuery("select * from taskdetails") ;
+				        	  resultset11_1 = statement_1.executeQuery("select * from taskdetails where (team='"+team1_1+"' and assignedto='"+username_dum+"') and (status='Closed' OR status='Completed' OR status='Duplicate')") ;
 				          }else{
-				        	  resultset = statement.executeQuery(strQuery) ;
+				        	  System.out.println("strQuery : "+strQuery);
+				        	  resultset11_1 = statement_1.executeQuery(strQuery) ;
 				          }
 				        	  
 				          
 			       %>
-			      <% 
-			     
-			      while(resultset.next()){ %>
+			      <% while(resultset11_1.next()){ %>
 			      <TR>
-			       <TD> <%= resultset.getString(1) %></td>
-			       <TD> <%= resultset.getString(2) %></TD>
-			       <TD> <%= resultset.getString(3) %></TD>
-			       <TD> <%= resultset.getString(4) %></TD>
-			       <TD> <%= resultset.getString(5) %></TD>
-			       <TD> <%= resultset.getString(6) %></TD>
-			       <TD> <%= resultset.getString(7) %></TD>
-				   <TD> <%= resultset.getString(8) %></TD>
-			       <TD> <%= resultset.getString(9) %></TD>
-			       <TD> <%= resultset.getString(10) %></TD>
-			       <TD> <%= resultset.getString(11) %></TD>
-			       <TD> <%= resultset.getString(12) %></TD>
-			       <TD> <%= resultset.getString(13) %></TD>
-			       <TD> <%= resultset.getString(14) %></TD>
-			       <TD> <%= resultset.getString(15) %></TD>
-			       <TD> <%= resultset.getString(16) %></TD>
-			       <TD> <%= resultset.getString(17) %></TD>
-			       <TD> <%= resultset.getString(18) %></TD>
-			       <TD> <%= resultset.getString(19) %></TD>
-			       <TD> <%= resultset.getString(20) %></TD>
-			        <TD>
-
+			       <TD> <%= resultset11_1.getString(1) %></td>
+			       <TD> <%= resultset11_1.getString(2) %></TD>
+			       <TD> <%= resultset11_1.getString(3) %></TD>
+			       <TD> <%= resultset11_1.getString(4) %></TD>
+			       <TD> <%= resultset11_1.getString(5) %></TD>
+			       <TD> <%= resultset11_1.getString(6) %></TD>
+			       <TD> <%= resultset11_1.getString(7) %></TD>
+				   <TD> <%= resultset11_1.getString(8) %></TD>
+			       <TD> <%= resultset11_1.getString(9) %></TD>
+			       <TD> <%= resultset11_1.getString(10) %></TD>
+			       <TD> <%= resultset11_1.getString(11) %></TD>
+			       <TD> <%= resultset11_1.getString(12) %></TD>
+			       <TD> <%= resultset11_1.getString(13) %></TD>
+			       <TD> <%= resultset11_1.getString(14) %></TD>
+			       <TD> <%= resultset11_1.getString(15) %></TD>
+			       <TD> <%= resultset11_1.getString(16) %></TD>
+			        
+			        <TD> <%= resultset11_1.getString(17) %></TD>
+			         <TD> <%= resultset11_1.getString(18) %></TD>
+			          <TD> <%= resultset11_1.getString(19) %></TD>
+			           <TD> <%= resultset11_1.getString(20) %></TD>
+					 <TD>
+						<form action="update.jsp" method="post">
+							<a href="update.jsp?id=<%=resultset11_1.getString("id")%>"><img src="Image/update.png" class="updateemail1"></a>
+						</form>
 		
  					</TD>
- 					
+
 			      </TR>
 			      <% } %>
 			     </TABLE>
-
 			    </div>
-			    </form>
-
+			    </form>	
 </body>
 </html>
